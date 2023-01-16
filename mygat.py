@@ -380,7 +380,7 @@ class ModelManager(nn.Module):
             slot_embedding = torch.matmul(slot_one_hot.float(), self.__slot_embedding) 
            # global_intent_adj = self.generate_global_intent_adj_gat(seq_lens, slot_index,  len(seq_lens),self.__args.slot_graph_window)
             
-            slot_lstm_out = self.__slot_hgat_lstm[i](torch.cat([h_slot, intent_logits], dim=-1), seq_lens)
+            slot_lstm_out = self.__slot_hgat_lstm[i](torch.cat([h_slot, intent_logits], dim=-1), seq_lens) +  self.__slot_hgat_lstm[i](torch.cat([h_slot, intent_logits*0.00001], dim=-1), seq_lens)+ self.__slot_hgat_lstm[i](torch.cat([h_slot*0.000001, intent_logits], dim=-1), seq_lens)
             slot_lstm_out = F.dropout(slot_lstm_out, p=self.__args.dropout_rate, training=self.training)       
             
 #            intent_lstm_out = self.__intent_hgat_lstm[i](torch.cat([h_intent, slot_logits], dim=-1), seq_lens)
