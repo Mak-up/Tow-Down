@@ -306,6 +306,7 @@ class ModelManager(nn.Module):
         if self.__args.gpu:
             adj = adj.cuda()
         return adj
+           
     def generate_self_adj(self, seq_len, batch, window):
         adj = torch.cat([torch.zeros(seq_len[0],seq_len[0]).unsqueeze(0) for i in range(batch)])
         for i in range(batch):
@@ -341,6 +342,9 @@ class ModelManager(nn.Module):
     def forward(self, text, seq_lens, hgat_flag = None,  n_predicts=None):
         word_tensor = self.__embedding(text)
         g_hiddens = self.G_encoder(word_tensor, seq_lens)
+
+
+        
         
 
         self_local_adj = self.generate_self_local_adj(seq_lens, len(seq_lens), self.__args.slot_graph_window)
@@ -472,7 +476,6 @@ class LSTMEncoder(nn.Module):
         padded_hiddens, _ = pad_packed_sequence(lstm_hiddens, batch_first=True)
 
         return padded_hiddens
-
 
 class slot_hgat(nn.Module):
 

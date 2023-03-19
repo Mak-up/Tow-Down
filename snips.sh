@@ -1,0 +1,2 @@
+# python -u train.py --fitlog 1 --decoder_gat_hidden_dim 256 -dd './data/MixSNIPS_clean' -lod './log/MixSNIPS' -rs 3407
+python -u train.py --fitlog 1 --decoder_gat_hidden_dim 256 -dd './data/MixSNIPS_clean' -lod './log/MixSNIPS' 
